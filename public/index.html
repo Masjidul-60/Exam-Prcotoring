@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Online Exam</title><link rel="stylesheet" href="style.css"></head><body>
+<div id="warn"></div>
+<div class="wrap" id="start">
+  <div class="card">
+    <h1>Online Exam (Proctored)</h1>
+    <p class="mut">Exam shuru korar age nicher niyomgulo porun:</p>
+    <ul>
+      <li>Webcam chalu thakbe ebong face camera-te thakte hobe.</li>
+      <li>Full-screen mode e exam dite hobe.</li>
+      <li>Tab / window change, copy-paste, right-click mara hobe &mdash; ei gulo violation hishebe gonno hobe.</li>
+      <li>Violation limit cross korle exam auto-submit hobe.</li>
+    </ul>
+    <label>Full Name<input id="name"></label>
+    <label>Roll / ID<input id="roll"></label>
+    <label><input type="checkbox" id="agree" style="width:auto"> Ami uporer niyomgulo mene nilam</label><br><br>
+    <button id="btnStart">Start Exam</button> <span id="err" class="viol"></span>
+  </div>
+</div>
+<div id="exam" class="hidden">
+  <div class="top"><b id="title"></b><span class="viol" id="viol">Violations: 0</span><span class="timer" id="timer"></span></div>
+  <div class="wrap"><div id="qs"></div><button id="btnSubmit">Submit Exam</button></div>
+  <video id="cam" autoplay muted playsinline></video>
+</div>
+<div class="wrap hidden" id="done"><div class="card"><h2>Exam Submitted</h2><p id="result"></p></div></div>
+<canvas id="cv" class="hidden"></canvas>
+<script src="exam.js"></script></body></html>

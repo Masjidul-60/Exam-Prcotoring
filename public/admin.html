@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin</title><link rel="stylesheet" href="style.css"></head><body>
+<div class="wrap" style="max-width:1100px">
+  <div class="card"><h1>Admin Dashboard</h1>
+    <input id="pass" type="password" placeholder="Admin password" style="max-width:260px">
+    <button id="go">Load</button> <button class="alt" id="ref">Refresh</button> <span id="err" class="viol"></span></div>
+  <div class="card" style="overflow-x:auto"><table><thead><tr><th>Name</th><th>Roll</th><th>Score</th><th>Violations</th><th>Status</th><th>Events</th><th>Snapshots</th></tr></thead><tbody id="rows"></tbody></table></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const el=(t,txt,cls)=>{const e=document.createElement(t);if(txt!==undefined)e.textContent=txt;if(cls)e.className=cls;return e};
+async function load(){
+  const p=$('pass').value;
+  const r=await fetch('/api/admin/sessions',{headers:{'x-admin-pass':p}});
+  if(!r.ok){$('err').textContent='Wrong password';return}
+  $('err').textContent='';
+  const data=await r.json(), tb=$('rows'); tb.innerHTML='';
+  data.forEach(s=>{
+    const tr=el('tr');
+    tr.append(el('td',s.name),el('td',s.roll),el('td',s.submitted?`${s.score}/${s.total}`:'-'),
+      el('td',s.violations,s.violations?'viol':''),el('td',s.submitted?`Submitted (${s.reason})`:'In progress'));
+    const ev=el('td'); s.events.forEach(e=>ev.append(el('div',`${new Date(e.t).toLocaleTimeString()} - ${e.type} ${e.detail}`))); tr.append(ev);
+    const sn=el('td',undefined,'snaps'); s.snaps.slice(-12).forEach(f=>{const i=document.createElement('img');i.src=`/api/admin/snap/${s.id}/${f}?pass=${encodeURIComponent(p)}`;sn.append(i)}); tr.append(sn);
+    tb.append(tr);
+  });
+}
+$('go').onclick=load;$('ref').onclick=load;
+</script></body></html>

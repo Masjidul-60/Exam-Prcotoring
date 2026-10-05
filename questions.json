@@ -1,0 +1,12 @@
+{
+  "title": "Sample Online Exam",
+  "durationMin": 10,
+  "maxViolations": 5,
+  "questions": [
+    { "q": "HTML stands for?", "options": ["Hyper Text Markup Language", "High Tech Modern Language", "Home Tool Markup Language", "Hyperlinks Text Mark Language"], "answer": 0 },
+    { "q": "Which is a JavaScript runtime for servers?", "options": ["Django", "Node.js", "Laravel", "Flask"], "answer": 1 },
+    { "q": "2 + 2 * 3 = ?", "options": ["12", "10", "8", "6"], "answer": 2 },
+    { "q": "CSS is used for?", "options": ["Database", "Styling web pages", "Networking", "Compiling"], "answer": 1 },
+    { "q": "Which HTTP method is usually used to submit data?", "options": ["GET", "HEAD", "POST", "TRACE"], "answer": 2 }
+  ]
+}
